@@ -1,0 +1,57 @@
+import rolando.*
+describe "test de la aventura de rolando" {
+    test "test de la parte 1.1" {
+        rolando.capacidadMaxima(2)
+        rolando.encontrarArtefacto(espadaDelDestino)
+        rolando.encontrarArtefacto(libroDeHechizo)
+        assert.equals(#{espadaDelDestino , libroDeHechizo} , rolando.artefactos())
+    }
+    test "test de la parte 1.2" {
+        rolando.capacidadMaxima(2)
+        rolando.encontrarArtefacto(espadaDelDestino)
+        rolando.encontrarArtefacto(libroDeHechizo)
+        rolando.llegarA(castillo)
+        assert.equals(#{espadaDelDestino , libroDeHechizo} , castillo.inventario())
+        rolando.encontrarArtefacto(collarDivino)
+        rolando.llegarA(castillo)
+        assert.equals(#{espadaDelDestino , libroDeHechizo , collarDivino} , castillo.inventario())
+    }
+
+    test "test de la parte 1.3" {
+      rolando.capacidadMaxima(2)
+      rolando.encontrarArtefacto(collarDivino)
+      rolando.encontrarArtefacto(espadaDelDestino)
+      rolando.llegarA(castillo)
+      assert.equals(#{espadaDelDestino , collarDivino}, castillo.inventario())
+      rolando.encontrarArtefacto(armaduraDeAceroValyrio)
+      assert.equals(#{espadaDelDestino , collarDivino , armaduraDeAceroValyrio}, rolando.poseciones())
+      assert.throwsException({rolando.tieneA(libroDeHechizo)})
+    }
+    test "test de la parte 1.4" {
+      rolando.capacidadMaxima(2)
+      rolando.encontrarArtefacto(espadaDelDestino)
+      rolando.encontrarArtefacto(libroDeHechizo)
+      rolando.encontrarArtefacto(collarDivino)
+      rolando.llegarA(castillo)
+      rolando.encontrarArtefacto(armaduraDeAceroValyrio)
+      rolando.encontrarArtefacto(collarDivino)
+      assert.equals([espadaDelDestino , libroDeHechizo , collarDivino , armaduraDeAceroValyrio , collarDivino] , rolando.historiaDeArtefactos())
+    }
+}
+
+describe "las batallas de rolando" {
+  test "test de la parte 2.1" {
+    rolando.capacidadMaxima(3)
+    rolando.poderBase(5)
+    rolando.encontrarArtefacto(espadaDelDestino)
+    rolando.encontrarArtefacto(armaduraDeAceroValyrio)
+    rolando.encontrarArtefacto(collarDivino)
+    assert.equals(19, rolando.poderDePelea())
+    rolando.pelearBatalla()
+    assert.equals(18 , rolando.poderDePelea())
+    rolando.pelearBatalla()
+    assert.equals(21.5, rolando.poderDePelea())
+    rolando.pelearBatalla()
+    assert.equals(24 , rolando.poderDePelea())
+  }
+}

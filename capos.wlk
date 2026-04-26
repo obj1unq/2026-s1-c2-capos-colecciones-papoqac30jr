@@ -102,17 +102,21 @@ object collarDivino {
 }
 
 object libroDeHechizo {
+    var hechizoSelecionado = null
 
+    method poderDeObjecto(personaje) {
+        return hechizoSelecionado.poder(personaje)
+    }
+
+    method cambiarHechizo(nuevoHechizo) {
+        hechizoSelecionado = nuevoHechizo
+    }
 }
 
 object armaduraDeAceroValyrio { 
-    var usos = 0
+    const poder = 6
     method poderDeObjecto(personaje) {
-        return 6
-    }
-
-    method usarObjecto() {
-        usos = usos + 1
+        return poder
     }
 }
 
@@ -125,5 +129,29 @@ object castillo {
 
     method depositarArtefactos(artefactos) {
         artefactos.forEach({nuevoArtefacto => inventario.add(nuevoArtefacto)})
+    }
+
+    method elMasPoderoso() {
+        var masPoderosoActual = inventario.min()
+        
+    }
+}
+
+object invisiblidad {
+    method poder(personaje) {
+        return personaje.poderBase()
+    }
+}
+
+object bendicion {
+    const poder = 4
+    method poder(personaje) {
+        return poder
+    }
+}
+
+object invocacion {
+    method poder(personaje) {
+        return personaje.poderObjecto(castillo.elMasPoderoso())
     }
 }

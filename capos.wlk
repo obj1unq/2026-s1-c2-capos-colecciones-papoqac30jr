@@ -111,6 +111,10 @@ object libroDeHechizo {
     method hechizos(nuevoHechizo) {
         hechizos.add(nuevoHechizo)
     } 
+
+    method usarObjecto() {
+        
+    }
 }
 
 object armaduraDeAceroValyrio { 
@@ -148,9 +152,13 @@ object castillo {
             otroArtefacto
         }
     }
+
+    method inventario(objecto) {
+        inventario.add(objecto)
+    }
 }
 
-object invisiblidad {
+object invisibilidad {
     method poder(personaje) {
         return personaje.poderBase()
     }

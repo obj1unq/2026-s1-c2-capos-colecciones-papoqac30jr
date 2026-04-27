@@ -102,15 +102,15 @@ object collarDivino {
 }
 
 object libroDeHechizo {
-    var hechizoSelecionado = null
+    const hechizos = []
 
     method poderDeObjecto(personaje) {
-        return hechizoSelecionado.poder(personaje)
+        return hechizos.poder(personaje)
     }
 
-    method cambiarHechizo(nuevoHechizo) {
-        hechizoSelecionado = nuevoHechizo
-    }
+    method hechizos(nuevoHechizo) {
+        hechizos.add(nuevoHechizo)
+    } 
 }
 
 object armaduraDeAceroValyrio { 

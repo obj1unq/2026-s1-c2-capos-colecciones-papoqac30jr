@@ -131,9 +131,22 @@ object castillo {
         artefactos.forEach({nuevoArtefacto => inventario.add(nuevoArtefacto)})
     }
 
-    method elMasPoderoso() {
-        var masPoderosoActual = inventario.min()
-        
+    method poderDelObjectoMasPoderoso(personaje) {
+        return self.elMasPoderosoEn(inventario , personaje)
+    }
+
+    method elMasPoderosoEn(artefactos , personaje) {
+        var elMasPoderosoActual = artefactos.min()
+        artefactos.forEach({artefacto => elMasPoderosoActual = self.elMasPoderosoEntre(elMasPoderosoActual , artefacto , personaje)})
+        return elMasPoderosoActual
+    }
+
+    method elMasPoderosoEntre(unArtefacto , otroArtefacto , personaje) {
+        return if(unArtefacto.poderDeObjecto(personaje) > otroArtefacto.poderDeObjecto(personaje)) {
+            unArtefacto
+        } else {
+            otroArtefacto
+        }
     }
 }
 
@@ -152,6 +165,6 @@ object bendicion {
 
 object invocacion {
     method poder(personaje) {
-        return personaje.poderObjecto(castillo.elMasPoderoso())
+        return castillo.poderDelObjectoMasPoderoso(personaje)
     }
 }

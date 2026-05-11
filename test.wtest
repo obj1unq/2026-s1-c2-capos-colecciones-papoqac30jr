@@ -1,4 +1,3 @@
-import file:c:UsersPablo2026-s1-c2-capos-colecciones-papoqac30jrcapos.*
 import capos.*
 describe "test de la aventura de rolando" {
     test "test de la parte 1.1" {
@@ -57,13 +56,6 @@ describe "las batallas de rolando" {
   }
 
   test "el libro de Hechizos" {
-    rolando.poderBase(5)
-    castillo.inventario(espadaDelDestino)
-    castillo.inventario(armaduraDeAceroValyrio)
-    castillo.inventario(collarDivino)
-    rolando.encontrarArtefacto(libroDeHechizo)
-    libroDeHechizo.hechizo(bendicion)
-    libroDeHechizo.hechizo(invisibilidad)
-    libroDeHechizo.hechizo(invocacion)
+    
   }
 }

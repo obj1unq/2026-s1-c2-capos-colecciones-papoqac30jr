@@ -5,16 +5,18 @@ object rolando {
     var poderBase = 0
 
     method encontrarArtefacto(artefacto) {
-        if (self.verificarMochila()) {
-            artefactos.add(artefacto)
-            historiaDeArtefactos.add(artefacto)
-        } else {
-            historiaDeArtefactos.add(artefacto)
-        }
+        self.agarrarArtefactoSiEsQuePuede(artefacto)
+        historiaDeArtefactos.add(artefacto)
     }
 
     method capacidadMaxima(nuevaCap) {
         capacidadMaxima = nuevaCap
+    }
+
+    method agarrarArtefactoSiEsQuePuede(artefacto) {
+        if (self.verificarMochila()) {
+            artefactos.add(artefacto)
+        }
     }
 
     method artefactos() {
@@ -69,10 +71,10 @@ object espadaDelDestino {
     const poderDespuesDelPrimerGolpe = {poder => poder / 2}
     method poderDeObjecto(personaje) {
       return if (not self.fueUsada()) {
-            personaje.poderBase()
-        } else {
-            poderDespuesDelPrimerGolpe.apply(personaje.poderBase())
-        }
+        personaje.poderBase()
+      } else {
+        poderDespuesDelPrimerGolpe.apply(personaje.poderBase())
+      }
     }
     
     method fueUsada() {
@@ -89,10 +91,12 @@ object collarDivino {
     var usos = 0
 
     method poderDeObjecto(personaje) {
-        return if (personaje.poderBase() <= 6) {
-            3
-        } else {
-            poderCollar + usos
+        return poderCollar + self.poderBonus(personaje)
+    }
+
+    method poderBonus(personaje) {
+        return if (personaje.poderBase() >= 6) {
+            usos
         }
     }
 
@@ -132,25 +136,11 @@ object castillo {
     }
 
     method depositarArtefactos(artefactos) {
-        artefactos.forEach({nuevoArtefacto => inventario.add(nuevoArtefacto)})
+        inventario.addAll(artefactos)
     }
 
     method poderDelObjectoMasPoderoso(personaje) {
         return self.elMasPoderosoEn(inventario , personaje)
-    }
-
-    method elMasPoderosoEn(artefactos , personaje) {
-        var elMasPoderosoActual = artefactos.min()
-        artefactos.forEach({artefacto => elMasPoderosoActual = self.elMasPoderosoEntre(elMasPoderosoActual , artefacto , personaje)})
-        return elMasPoderosoActual
-    }
-
-    method elMasPoderosoEntre(unArtefacto , otroArtefacto , personaje) {
-        return if(unArtefacto.poderDeObjecto(personaje) > otroArtefacto.poderDeObjecto(personaje)) {
-            unArtefacto
-        } else {
-            otroArtefacto
-        }
     }
 
     method inventario(objecto) {
@@ -173,6 +163,6 @@ object bendicion {
 
 object invocacion {
     method poder(personaje) {
-        return castillo.poderDelObjectoMasPoderoso(personaje)
+        return 
     }
 }

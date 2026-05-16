@@ -3,6 +3,7 @@ object rolando {
     const artefactos = #{}
     const historiaDeArtefactos = []
     var poderBase = 0
+    var morada = castillo
 
     method encontrarArtefacto(artefacto) {
         self.agarrarArtefactoSiEsQuePuede(artefacto)
@@ -64,6 +65,10 @@ object rolando {
         self.artefactos().forEach({objecto => objecto.usarObjecto()})
         poderBase = poderBase + 1
     }
+
+    method artefactoMasPoderosoDeSuMorada() {
+        return morada.artefactoMasPoderosoAqui(self)
+    }
 }
 
 object espadaDelDestino {
@@ -97,6 +102,8 @@ object collarDivino {
     method poderBonus(personaje) {
         return if (personaje.poderBase() >= 6) {
             usos
+        } else {
+            0
         }
     }
 
@@ -140,11 +147,19 @@ object castillo {
     }
 
     method poderDelObjectoMasPoderoso(personaje) {
-        return self.elMasPoderosoEn(inventario , personaje)
+        return 
     }
 
     method inventario(objecto) {
         inventario.add(objecto)
+    }
+
+    method artefactoMasPoderosoAqui(personaje) {
+        return self.nivelesDePoderDe(inventario , personaje).max()
+    }
+
+    method nivelesDePoderDe(lista , personaje) {
+        return lista.map({artefacto => artefacto.poderDeObjecto(personaje)})
     }
 }
 
@@ -163,6 +178,6 @@ object bendicion {
 
 object invocacion {
     method poder(personaje) {
-        return 
+        return personaje.artefactoMasPoderosoDeSuMorada()
     }
 }

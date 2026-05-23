@@ -25,7 +25,7 @@ describe "test de la aventura de rolando" {
       assert.equals(#{espadaDelDestino , collarDivino}, castillo.inventario())
       rolando.encontrarArtefacto(armaduraDeAceroValyrio)
       assert.equals(#{espadaDelDestino , collarDivino , armaduraDeAceroValyrio}, rolando.poseciones())
-      assert.throwsException({rolando.tieneA(libroDeHechizo)})
+      assert.equals(false , rolando.tieneA(libroDeHechizo))
     }
     test "test de la parte 1.4" {
       rolando.capacidadMaxima(2)
@@ -56,6 +56,20 @@ describe "las batallas de rolando" {
   }
 
   test "el libro de Hechizos" {
-    
+    rolando.poderBase(5)
+    castillo.inventario(espadaDelDestino)
+    castillo.inventario(armaduraDeAceroValyrio)
+    castillo.inventario(collarDivino)
+    rolando.encontrarArtefacto(libroDeHechizo)
+    libroDeHechizo.hechizos(bendicion)
+    libroDeHechizo.hechizos(invisibilidad)
+    libroDeHechizo.hechizos(invocacion)
+    assert.equals(4, rolando.poderObjectos())
+    rolando.pelearBatalla()
+    assert.equals(6, rolando.poderObjectos())
+    rolando.pelearBatalla()
+    assert.equals(7, rolando.poderObjectos())
+    rolando.pelearBatalla()
+    assert.equals(0 , rolando.poderObjectos())
   }
 }

@@ -34,7 +34,7 @@ object rolando {
     }
 
     method poseciones() {
-        return castillo.inventario().union(self.artefactos()) 
+        return morada.inventario().union(self.artefactos()) 
     }
 
     method tieneA(artefacto) {
@@ -100,7 +100,7 @@ object collarDivino {
     }
 
     method poderBonus(personaje) {
-        return if (personaje.poderBase() >= 6) {
+        return if (personaje.poderBase() > 6) {
             usos
         } else {
             0
@@ -116,11 +116,15 @@ object libroDeHechizo {
     const hechizos = []
 
     method poderDeObjecto(personaje) {
-        return self.poderDeHechizos(hechizos , personaje).fisrt()
+        return if (hechizos.size() >= 1) {
+            self.poderDeHechizos(hechizos.asList() , personaje).first()
+        } else {
+            0
+        }
     }
 
     method poderDeHechizos(hechizosDentroDelLibro , personaje) {
-        return hechizosDentroDelLibro.map({hechizo => hechizo.poderDeObjecto(personaje)})
+        return hechizosDentroDelLibro.map({hechizo => hechizo.poder(personaje)})
     }
 
     method hechizos(nuevoHechizo) {
@@ -128,7 +132,9 @@ object libroDeHechizo {
     } 
 
     method usarObjecto() {
-        
+        if (hechizos.size() >= 1) {
+        hechizos.remove(hechizos.first())
+        }
     }
 }
 
@@ -136,10 +142,14 @@ object armaduraDeAceroValyrio {
     method poderDeObjecto(personaje) {
         return 6
     }
+
+    method usarObjecto() {
+
+    }
 }
 
 object castillo {
-    const inventario = []
+    const inventario = #{}
 
     method inventario() {
         return inventario 
@@ -158,7 +168,7 @@ object castillo {
     }
 
     method nivelesDePoderDe(lista , personaje) {
-        return lista.map({artefacto => artefacto.poder(personaje)})
+        return lista.map({artefacto => artefacto.poderDeObjecto(personaje)})
     }
 }
 
@@ -169,9 +179,8 @@ object invisibilidad {
 }
 
 object bendicion {
-    const poder = 4
     method poder(personaje) {
-        return poder
+        return 4
     }
 }
 

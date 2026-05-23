@@ -116,7 +116,11 @@ object libroDeHechizo {
     const hechizos = []
 
     method poderDeObjecto(personaje) {
-        return hechizos.poder(personaje)
+        return self.poderDeHechizos(hechizos , personaje).fisrt()
+    }
+
+    method poderDeHechizos(hechizosDentroDelLibro , personaje) {
+        return hechizosDentroDelLibro.map({hechizo => hechizo.poderDeObjecto(personaje)})
     }
 
     method hechizos(nuevoHechizo) {
@@ -129,14 +133,13 @@ object libroDeHechizo {
 }
 
 object armaduraDeAceroValyrio { 
-    const poder = 6
     method poderDeObjecto(personaje) {
-        return poder
+        return 6
     }
 }
 
 object castillo {
-    const inventario = #{}
+    const inventario = []
 
     method inventario() {
         return inventario 
@@ -144,10 +147,6 @@ object castillo {
 
     method depositarArtefactos(artefactos) {
         inventario.addAll(artefactos)
-    }
-
-    method poderDelObjectoMasPoderoso(personaje) {
-        return 
     }
 
     method inventario(objecto) {
@@ -159,7 +158,7 @@ object castillo {
     }
 
     method nivelesDePoderDe(lista , personaje) {
-        return lista.map({artefacto => artefacto.poderDeObjecto(personaje)})
+        return lista.map({artefacto => artefacto.poder(personaje)})
     }
 }
 

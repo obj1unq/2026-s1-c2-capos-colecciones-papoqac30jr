@@ -1,4 +1,8 @@
 import capos.*
+import moradas.*
+import enemigos.*
+import artefactos.*
+
 describe "test de la aventura de rolando" {
     test "test de la parte 1.1" {
         rolando.capacidadMaxima(2)

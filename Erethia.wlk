@@ -89,6 +89,18 @@ object rolando {
     method enemigos(nuevoEnemigo) {
         enemigos.add(nuevoEnemigo)
     }
+
+    method esPoderoso() {
+        return self.poderDePelea()  > self.elEnemigoMasPoderoso()
+    }
+
+    method elEnemigoMasPoderoso() {
+        return self.nivelesDePoderDeEnemigos().max()
+    }
+
+    method nivelesDePoderDeEnemigos() {
+        return enemigos.map({enemigo => enemigo.poderDePelea()})
+    }
 }
 
 object caterina {

@@ -88,4 +88,18 @@ test "Los enemigos aparecen" {
   assert.equals([archibaldo , astra] , rolando.enemigosVencibles())
   assert.equals([palacioDeMarmol , torreDeMarfil] , rolando.moradasConquistables())
  }
+
+test "Rolando el mas fuerte" {
+  rolando.capacidadMaxima(5)
+  rolando.poderBase(5)
+  rolando.encontrarArtefacto(espadaDelDestino)
+  rolando.encontrarArtefacto(armaduraDeAceroValyrio)
+  rolando.encontrarArtefacto(collarDivino)
+  rolando.enemigos(archibaldo)
+  rolando.enemigos(astra)
+  rolando.enemigos(caterina)
+  assert.equals(false , rolando.esPoderoso())
+  rolando.poderBase(10)
+  assert.equals(true , rolando.esPoderoso())
+}
 }

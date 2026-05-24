@@ -1,4 +1,4 @@
-import capos.*
+import Erethia.*
 import artefactos.*
 
 object castillo {
@@ -23,4 +23,16 @@ object castillo {
     method nivelesDePoderDe(lista , personaje) {
         return lista.map({artefacto => artefacto.poderDeObjecto(personaje)})
     }
+}
+
+object fortalezaDeAcero {
+
+}
+
+object palacioDeMarmol {
+
+}
+
+object torreDeMarfil {
+    
 }

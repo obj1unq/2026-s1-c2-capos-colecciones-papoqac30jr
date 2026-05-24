@@ -1,6 +1,5 @@
-import capos.*
+import Erethia.*
 import moradas.*
-import enemigos.*
 
 object espadaDelDestino {
     var fueUsada = false

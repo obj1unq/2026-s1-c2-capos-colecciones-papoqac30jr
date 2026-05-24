@@ -7,7 +7,7 @@ object rolando {
     const historiaDeArtefactos = []
     var poderBase = 0
     const morada = castillo
-    var enemigos = []
+    const enemigos = []
 
     method encontrarArtefacto(artefacto) {
         self.agarrarArtefactoSiEsQuePuede(artefacto)
@@ -100,6 +100,24 @@ object rolando {
 
     method nivelesDePoderDeEnemigos() {
         return enemigos.map({enemigo => enemigo.poderDePelea()})
+    }
+
+    method tieneArtefactoLetalContra(enemigo) {
+        return self.poderArtefactoMasPoderoso() > enemigo.poderDePelea()
+    }
+
+    method poderArtefactoMasPoderoso() {
+        return self.poderesObjectos(artefactos.asList()).max()
+    }
+
+    method poderesObjectos(inventario) {
+        return inventario.map({artefacto => artefacto.poderDeObjecto(self)})
+    }
+
+    method artefactoLetalContra(enemigo) {
+        return if (self.poderArtefactoMasPoderoso() > enemigo.poderDePelea()) {
+            artefactos.max({artefacto => artefacto.poderDeObjecto(self)})
+        }
     }
 }
 

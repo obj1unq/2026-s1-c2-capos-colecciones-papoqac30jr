@@ -102,4 +102,14 @@ test "Rolando el mas fuerte" {
   rolando.poderBase(10)
   assert.equals(true , rolando.esPoderoso())
 }
+
+test "Rolando y su arma Letal" {
+  rolando.poderBase(15)
+  rolando.encontrarArtefacto(espadaDelDestino)
+  rolando.encontrarArtefacto(collarDivino)
+  rolando.encontrarArtefacto(armaduraDeAceroValyrio)
+  assert.equals(true, rolando.tieneArtefactoLetalContra(astra))
+  assert.equals(espadaDelDestino , rolando.artefactoLetalContra(astra))
+  assert.equals(false , rolando.tieneArtefactoLetalContra(caterina))
+}
 }

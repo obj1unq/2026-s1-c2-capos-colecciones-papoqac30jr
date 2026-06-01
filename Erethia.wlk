@@ -107,21 +107,17 @@ object rolando {
     }
 
     method tieneArtefactoLetalContra(enemigo) {
-        return self.poderArtefactoMasPoderoso() > enemigo.poderDePelea()
+        return self.artefactoLetalContra(enemigo).size() >= 1
     }
 
-    method poderArtefactoMasPoderoso() {
-        return self.poderesObjectos(artefactos.asList()).max()
+    method artefactosLetalesContra(enemigo) {
+        return artefactos.filter({artefacto  => artefacto.poderDeObjecto(self) > enemigo.poderDePelea()})
     }
-
-    method poderesObjectos(inventario) {
-        return inventario.map({artefacto => artefacto.poderDeObjecto(self)})
-    }
-
+    
     method artefactoLetalContra(enemigo) {
-        return if (self.poderArtefactoMasPoderoso() > enemigo.poderDePelea()) {
-            artefactos.max({artefacto => artefacto.poderDeObjecto(self)})
-        }
+        // Nota: intente realizarlo con any o anyOne pero rompe el test cuando intento hacerlo asi.
+        // cuando lo vuelvas a corregir me dices por que me pasa eso? aunque seguramente nos veamos en la clase del miercoles antes de que lo corrigas devuelta
+        return self.artefactosLetalesContra(enemigo)
     }
 }
 

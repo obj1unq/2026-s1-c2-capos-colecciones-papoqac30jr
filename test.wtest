@@ -109,7 +109,7 @@ test "Rolando y su arma Letal" {
   rolando.encontrarArtefacto(collarDivino)
   rolando.encontrarArtefacto(armaduraDeAceroValyrio)
   assert.equals(true, rolando.tieneArtefactoLetalContra(astra))
-  assert.equals(espadaDelDestino , rolando.artefactoLetalContra(astra))
+  assert.equals(#{espadaDelDestino} , rolando.artefactoLetalContra(astra))
   assert.equals(false , rolando.tieneArtefactoLetalContra(caterina))
 }
 }

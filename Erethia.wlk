@@ -95,15 +95,15 @@ object rolando {
     }
 
     method esPoderoso() {
-        return self.poderDePelea()  > self.elEnemigoMasPoderoso()
+        return self.puedeVencerASusEnemigos()
     }
 
-    method elEnemigoMasPoderoso() {
-        return self.nivelesDePoderDeEnemigos().max()
-    }
+    method puedeVencerASusEnemigos() {
+        return self.enemigosQueNoPuedeVencer().size() == 0
+    } 
 
-    method nivelesDePoderDeEnemigos() {
-        return enemigos.map({enemigo => enemigo.poderDePelea()})
+    method enemigosQueNoPuedeVencer() {
+        return self.enemigos().filter({enemigo => !enemigo.puedeSerVencido(self)})
     }
 
     method tieneArtefactoLetalContra(enemigo) {

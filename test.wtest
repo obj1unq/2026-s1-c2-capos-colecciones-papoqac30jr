@@ -1,0 +1,115 @@
+import Erethia.*
+import moradas.*
+import artefactos.*
+
+describe "La aventura de rolando" {
+    test "Rolando" {
+        rolando.capacidadMaxima(2)
+        rolando.encontrarArtefacto(espadaDelDestino)
+        rolando.encontrarArtefacto(libroDeHechizo)
+        assert.equals(#{espadaDelDestino , libroDeHechizo} , rolando.artefactos())
+    }
+    test "Una terrible fortaleza(de ladrillo)" {
+        rolando.capacidadMaxima(2)
+        rolando.encontrarArtefacto(espadaDelDestino)
+        rolando.encontrarArtefacto(libroDeHechizo)
+        rolando.llegarASuMorada()
+        assert.equals(#{espadaDelDestino , libroDeHechizo} , castillo.inventario())
+        rolando.encontrarArtefacto(collarDivino)
+        rolando.llegarASuMorada()
+        assert.equals(#{espadaDelDestino , libroDeHechizo , collarDivino} , castillo.inventario())
+    }
+
+    test "Que hay en nuestra mochila?" {
+      rolando.capacidadMaxima(2)
+      rolando.encontrarArtefacto(collarDivino)
+      rolando.encontrarArtefacto(espadaDelDestino)
+      rolando.llegarASuMorada()
+      assert.equals(#{espadaDelDestino , collarDivino}, castillo.inventario())
+      rolando.encontrarArtefacto(armaduraDeAceroValyrio)
+      assert.equals(#{espadaDelDestino , collarDivino , armaduraDeAceroValyrio}, rolando.poseciones())
+      assert.equals(false , rolando.tieneA(libroDeHechizo))
+    }
+    test "Historial de Objectos" {
+      rolando.capacidadMaxima(2)
+      rolando.encontrarArtefacto(espadaDelDestino)
+      rolando.encontrarArtefacto(libroDeHechizo)
+      rolando.encontrarArtefacto(collarDivino)
+      rolando.llegarASuMorada()
+      rolando.encontrarArtefacto(armaduraDeAceroValyrio)
+      rolando.encontrarArtefacto(collarDivino)
+      assert.equals([espadaDelDestino , libroDeHechizo , collarDivino , armaduraDeAceroValyrio , collarDivino] , rolando.historiaDeArtefactos())
+    }
+}
+
+describe "Las batallas de rolando" {
+  test "El poder Nuestro es!" {
+    rolando.capacidadMaxima(3)
+    rolando.poderBase(5)
+    rolando.encontrarArtefacto(espadaDelDestino)
+    rolando.encontrarArtefacto(armaduraDeAceroValyrio)
+    rolando.encontrarArtefacto(collarDivino)
+    assert.equals(19, rolando.poderDePelea())
+    rolando.pelearBatalla()
+    assert.equals(18 , rolando.poderDePelea())
+    rolando.pelearBatalla()
+    assert.equals(21.5, rolando.poderDePelea())
+    rolando.pelearBatalla()
+    assert.equals(24 , rolando.poderDePelea())
+  }
+
+  test "el libro de Hechizos" {
+    rolando.poderBase(5)
+    castillo.inventario(espadaDelDestino)
+    castillo.inventario(armaduraDeAceroValyrio)
+    castillo.inventario(collarDivino)
+    rolando.encontrarArtefacto(libroDeHechizo)
+    libroDeHechizo.hechizos(bendicion)
+    libroDeHechizo.hechizos(invisibilidad)
+    libroDeHechizo.hechizos(invocacion)
+    assert.equals(4, rolando.poderObjectos())
+    rolando.pelearBatalla()
+    assert.equals(6, rolando.poderObjectos())
+    rolando.pelearBatalla()
+    assert.equals(7, rolando.poderObjectos())
+    rolando.pelearBatalla()
+    assert.equals(0 , rolando.poderObjectos())
+  }
+
+test "Los enemigos aparecen" {
+  rolando.capacidadMaxima(5)
+  rolando.poderBase(5)
+  rolando.encontrarArtefacto(espadaDelDestino)
+  rolando.encontrarArtefacto(armaduraDeAceroValyrio)
+  rolando.encontrarArtefacto(collarDivino)
+  rolando.enemigos(archibaldo)
+  rolando.enemigos(astra)
+  rolando.enemigos(caterina)
+  assert.equals([archibaldo , astra] , rolando.enemigosVencibles())
+  assert.equals([palacioDeMarmol , torreDeMarfil] , rolando.moradasConquistables())
+ }
+
+test "Rolando el mas fuerte" {
+  rolando.capacidadMaxima(5)
+  rolando.poderBase(5)
+  rolando.encontrarArtefacto(espadaDelDestino)
+  rolando.encontrarArtefacto(armaduraDeAceroValyrio)
+  rolando.encontrarArtefacto(collarDivino)
+  rolando.enemigos(archibaldo)
+  rolando.enemigos(astra)
+  rolando.enemigos(caterina)
+  assert.equals(false , rolando.esPoderoso())
+  rolando.poderBase(10)
+  assert.equals(true , rolando.esPoderoso())
+}
+
+test "Rolando y su arma Letal" {
+  rolando.poderBase(15)
+  rolando.encontrarArtefacto(espadaDelDestino)
+  rolando.encontrarArtefacto(collarDivino)
+  rolando.encontrarArtefacto(armaduraDeAceroValyrio)
+  assert.equals(true, rolando.tieneArtefactoLetalContra(astra))
+  assert.equals(#{espadaDelDestino} , rolando.artefactoLetalContra(astra))
+  assert.equals(false , rolando.tieneArtefactoLetalContra(caterina))
+}
+}

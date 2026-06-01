@@ -17,11 +17,11 @@ object castillo {
     }
 
     method artefactoMasPoderosoAqui(personaje) {
-        return self.nivelesDePoderDe(inventario , personaje).max()
+        return self.nivelesDePoderDe(personaje).max()
     }
 
-    method nivelesDePoderDe(lista , personaje) {
-        return lista.map({artefacto => artefacto.poderDeObjecto(personaje)})
+    method nivelesDePoderDe(personaje) {
+        return inventario.map({artefacto => artefacto.poderDeObjecto(personaje)})
     }
 }
 

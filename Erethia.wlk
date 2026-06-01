@@ -19,7 +19,7 @@ object rolando {
     }
 
     method agarrarArtefactoSiEsQuePuede(artefacto) {
-        if (self.verificarMochila()) {
+        if (self.tieneEspacio()) {
             artefactos.add(artefacto)
         }
     }
@@ -28,12 +28,12 @@ object rolando {
         return artefactos
     }
 
-    method verificarMochila() {
+    method tieneEspacio() {
         return artefactos.size() < capacidadMaxima
     }
 
-    method llegarA(hogar) {
-        hogar.depositarArtefactos(self.artefactos())
+    method llegarASuMorada() {
+        morada.depositarArtefactos(self.artefactos())
         artefactos.clear()
     }
 
@@ -66,8 +66,12 @@ object rolando {
     }
 
     method pelearBatalla() {
-        self.artefactos().forEach({objecto => objecto.usarObjecto()})
+        self.usarObjectos()
         poderBase = poderBase + 1
+    }
+
+    method usarObjectos() {
+        artefactos.forEach({objecto => objecto.usarObjecto()})
     }
 
     method artefactoMasPoderosoDeSuMorada() {

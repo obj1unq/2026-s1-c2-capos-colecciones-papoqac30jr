@@ -47,14 +47,14 @@ object libroDeHechizo {
 
     method poderDeObjecto(personaje) {
         return if (hechizos.size() >= 1) {
-            self.poderDeHechizos(hechizos.asList() , personaje).first()
+            self.poderDeHechizo(hechizos.first() , personaje)
         } else {
             0
         }
     }
 
-    method poderDeHechizos(hechizosDentroDelLibro , personaje) {
-        return hechizosDentroDelLibro.map({hechizo => hechizo.poder(personaje)})
+    method poderDeHechizo(hechizo , personaje) {
+        return hechizo.poder(personaje)
     }
 
     method hechizos(nuevoHechizo) {

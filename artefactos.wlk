@@ -19,6 +19,10 @@ object espadaDelDestino {
     method usarObjecto() {
         fueUsada = true
     }
+
+    method esLetalContra(personaje , enemigo) {
+        return self.poderDeObjecto(personaje) > enemigo.poderDePelea()
+    }
 }
 
 object collarDivino {
@@ -39,6 +43,9 @@ object collarDivino {
 
     method usarObjecto() {
         usos = usos +1
+    }
+    method esLetalContra(personaje , enemigo) {
+        return self.poderDeObjecto(personaje) > enemigo.poderDePelea()
     }
 }
 
@@ -66,6 +73,9 @@ object libroDeHechizo {
         hechizos.remove(hechizos.first())
         }
     }
+    method esLetalContra(personaje , enemigo) {
+        return self.poderDeObjecto(personaje) > enemigo.poderDePelea()
+    }
 }
 
 object armaduraDeAceroValyrio { 
@@ -75,6 +85,9 @@ object armaduraDeAceroValyrio {
 
     method usarObjecto() {
 
+    }
+    method esLetalContra(personaje , enemigo) {
+        return self.poderDeObjecto(personaje) > enemigo.poderDePelea()
     }
 }
 

@@ -99,25 +99,15 @@ object rolando {
     }
 
     method puedeVencerASusEnemigos() {
-        return self.enemigosQueNoPuedeVencer().size() == 0
+        return self.enemigos().all({enemigo => enemigo.puedeSerVencido(self)})
     } 
 
-    method enemigosQueNoPuedeVencer() {
-        return self.enemigos().filter({enemigo => !enemigo.puedeSerVencido(self)})
-    }
-
-    method tieneArtefactoLetalContra(enemigo) {
-        return self.artefactoLetalContra(enemigo).size() >= 1
-    }
-
-    method artefactosLetalesContra(enemigo) {
-        return artefactos.filter({artefacto  => artefacto.poderDeObjecto(self) > enemigo.poderDePelea()})
+    method artefactoLetalContra(enemigo) {
+        return artefactos.find({artefacto  => artefacto.esLetalContra(self , enemigo)})
     }
     
-    method artefactoLetalContra(enemigo) {
-        // Nota: intente realizarlo con any o anyOne pero rompe el test cuando intento hacerlo asi.
-        // cuando lo vuelvas a corregir me dices por que me pasa eso? aunque seguramente nos veamos en la clase del miercoles antes de que lo corrigas devuelta
-        return self.artefactosLetalesContra(enemigo)
+    method tieneArtefactoLetalContra(enemigo) {
+       return artefactos.contains(self.artefactoLetalContra(enemigo))
     }
 }
 

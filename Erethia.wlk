@@ -99,7 +99,7 @@ object rolando {
     }
 
     method puedeVencerASusEnemigos() {
-        return self.enemigos().all({enemigo => enemigo.puedeSerVencido(self)})
+        return enemigos.all({enemigo => enemigo.puedeSerVencido(self)})
     } 
 
     method artefactoLetalContra(enemigo) {
